@@ -21,6 +21,8 @@ export type KknProgram = {
 export type KknProgramImage = {
   src: string;
   alt?: string;
+  width: number;
+  height: number;
   orientation?: "portrait" | "landscape";
   fit?: "contain" | "cover";
   objectPosition?: string;
@@ -197,18 +199,26 @@ const kknProgramBases: KknProgramBase[] = [
       {
         src: "/images/Proker/Mey/1.jpeg",
         alt: "Dokumentasi pengolahan pupuk kompos 1",
+        width: 960,
+        height: 1280,
       },
       {
         src: "/images/Proker/Mey/2.jpeg",
         alt: "Dokumentasi pengolahan pupuk kompos 2",
+        width: 1280,
+        height: 960,
       },
       {
         src: "/images/Proker/Mey/3.jpeg",
         alt: "Dokumentasi pengolahan pupuk kompos 3",
+        width: 1280,
+        height: 960,
       },
       {
         src: "/images/Proker/Mey/4.jpeg",
         alt: "Dokumentasi pengolahan pupuk kompos 4",
+        width: 1280,
+        height: 960,
       },
     ],
   },
@@ -302,18 +312,24 @@ const kknProgramBases: KknProgramBase[] = [
       {
         src: "/images/Proker/Rasulan/1.JPG",
         alt: "Peserta arak-arakan Rasulan membawa lambang Sumberjo",
+        width: 3024,
+        height: 4032,
         orientation: "portrait",
         fit: "contain",
       },
       {
         src: "/images/Proker/Rasulan/2.JPG",
         alt: "Rombongan arak-arakan Rasulan di jalan desa",
+        width: 3024,
+        height: 4032,
         orientation: "portrait",
         fit: "contain",
       },
       {
         src: "/images/Proker/Rasulan/3.JPG",
         alt: "Potret peserta kegiatan Rasulan",
+        width: 6000,
+        height: 4000,
         orientation: "landscape",
         fit: "cover",
         objectPosition: "object-center",
@@ -321,6 +337,8 @@ const kknProgramBases: KknProgramBase[] = [
       {
         src: "/images/Proker/Rasulan/4.JPG",
         alt: "Barisan musik dalam kegiatan Rasulan",
+        width: 6000,
+        height: 4000,
         orientation: "landscape",
         fit: "cover",
         objectPosition: "object-center",
@@ -348,18 +366,26 @@ const kknProgramBases: KknProgramBase[] = [
       {
         src: "/images/Proker/Sinay/1.JPG",
         alt: "Dokumentasi edukasi pemanfaatan AI 1",
+        width: 2976,
+        height: 1984,
       },
       {
         src: "/images/Proker/Sinay/2.JPG",
         alt: "Dokumentasi edukasi pemanfaatan AI 2",
+        width: 2976,
+        height: 1984,
       },
       {
         src: "/images/Proker/Sinay/3.JPG",
         alt: "Dokumentasi edukasi pemanfaatan AI 3",
+        width: 2976,
+        height: 1984,
       },
       {
         src: "/images/Proker/Sinay/4.JPG",
         alt: "Dokumentasi edukasi pemanfaatan AI 4",
+        width: 2976,
+        height: 1984,
       },
     ],
   },
@@ -445,6 +471,8 @@ export const kknPrograms: KknProgram[] = kknProgramBases.map((program) => {
     .filter((fileName) => !isCoverFileName(fileName))
     .map((fileName) => ({
       src: getImagePublicPath(program.folder, fileName),
+      width: 1200,
+      height: 900,
     }));
   const documentationImages =
     program.documentationImages ?? generatedDocumentationImages;
@@ -452,7 +480,7 @@ export const kknPrograms: KknProgram[] = kknProgramBases.map((program) => {
     program.coverImage ??
     (generatedCoverFileName
       ? getImagePublicPath(program.folder, generatedCoverFileName)
-      : generatedDocumentationImages[0] ?? PLACEHOLDER_IMAGE);
+      : generatedDocumentationImages[0]?.src ?? PLACEHOLDER_IMAGE);
 
   return {
     ...program,

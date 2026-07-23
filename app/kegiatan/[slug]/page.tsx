@@ -1,9 +1,6 @@
-import fs from "node:fs";
-import path from "node:path";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { imageSize } from "next/dist/compiled/image-size";
 import Footer from "@/components/Footer";
 import KegiatanGalleryImage from "@/components/KegiatanGalleryImage";
 import { getKknProgramBySlug, kknPrograms } from "@/data/kknPrograms";
@@ -14,25 +11,6 @@ export function generateStaticParams() {
   return kknPrograms.map((program) => ({
     slug: program.slug,
   }));
-}
-
-function getImageMetadata(imagePath: string) {
-  const normalizedPath = decodeURIComponent(imagePath).replace(/^\/+/, "");
-  const absolutePath = path.join(process.cwd(), "public", normalizedPath);
-
-  if (!fs.existsSync(absolutePath)) {
-    return {
-      height: 1200,
-      width: 960,
-    };
-  }
-
-  const dimensions = imageSize(absolutePath);
-
-  return {
-    height: dimensions.height ?? 1200,
-    width: dimensions.width ?? 960,
-  };
 }
 
 export default async function KegiatanDetailPage(
@@ -47,7 +25,8 @@ export default async function KegiatanDetailPage(
 
   const documentationGallery = program.documentationImages.map((image) => ({
     ...image,
-    ...getImageMetadata(image.src),
+    width: image.width,
+    height: image.height,
   }));
   return (
     <main className="overflow-x-hidden">

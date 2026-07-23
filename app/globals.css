@@ -12,6 +12,10 @@
   --accent-soft: #f8e7ba;
   --border-soft: rgba(15, 76, 43, 0.12);
   --shadow-soft: 0 22px 55px rgba(15, 76, 43, 0.12);
+  --font-geist-sans:
+    "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-geist-mono:
+    "Cascadia Code", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 
 @theme inline {
