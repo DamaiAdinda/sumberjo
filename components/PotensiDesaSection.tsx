@@ -146,22 +146,26 @@ export default function PotensiDesaSection() {
               </div>
 
               {selectedItem.gallery.length > 0 ? (
-                <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {selectedItem.gallery.map((imagePath, index) => (
-                    <div
-                      key={`${selectedItem.title}-${imagePath}`}
-                      className="overflow-hidden rounded-[1.1rem] bg-white shadow-[0_18px_40px_rgba(15,76,43,0.1)]"
+                <div className="mx-auto mt-5 w-full max-w-5xl">
+                  <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+                  {selectedItem.gallery.map((image, index) => (
+                    <figure
+                      key={`${selectedItem.title}-${image.src}`}
+                      className="relative h-[260px] overflow-hidden rounded-[1.1rem] md:h-[340px]"
                     >
-                      <div className="relative h-44">
-                        <Image
-                          src={imagePath}
-                          alt={`${selectedItem.title} ${index + 1}`}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                    </div>
+                      <Image
+                        src={image.src}
+                        alt={image.alt || `${selectedItem.title} ${index + 1}`}
+                        width={image.width}
+                        height={image.height}
+                        sizes="(max-width: 767px) 100vw, 50vw"
+                        className={`h-full w-full rounded-[1.1rem] object-cover ${
+                          index === 0 ? "object-center" : "object-[center_70%]"
+                        }`}
+                      />
+                    </figure>
                   ))}
+                  </div>
                 </div>
               ) : (
                 <div className="mt-5 rounded-[1.2rem] border border-dashed border-[color:var(--border-soft)] bg-white px-5 py-6 text-sm leading-6 text-[color:var(--foreground)]/72">

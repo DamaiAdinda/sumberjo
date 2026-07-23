@@ -14,12 +14,25 @@ export type KknProgram = {
   implementation: string;
   impact: string;
   coverImage: string;
-  documentationImages: string[];
+  coverImagePosition?: string;
+  documentationImages: KknProgramImage[];
 };
 
-type KknProgramBase = Omit<KknProgram, "coverImage" | "documentationImages"> & {
+export type KknProgramImage = {
+  src: string;
+  alt?: string;
+  orientation?: "portrait" | "landscape";
+  fit?: "contain" | "cover";
+  objectPosition?: string;
+};
+
+type KknProgramBase = Omit<
+  KknProgram,
+  "coverImage" | "coverImagePosition" | "documentationImages"
+> & {
   coverImage?: string;
-  documentationImages?: string[];
+  coverImagePosition?: string;
+  documentationImages?: KknProgramImage[];
 };
 
 const PROKER_ROOT = path.join(process.cwd(), "public", "images", "Proker");
@@ -181,10 +194,22 @@ const kknProgramBases: KknProgramBase[] = [
       "Dampak dari kegiatan ini adalah bertambahnya pemahaman masyarakat tentang pengelolaan sampah organik yang lebih bernilai guna. Program ini membantu memperluas kesadaran bahwa langkah kecil dalam pengolahan limbah dapat memberi manfaat bagi lingkungan sekitar. Selain itu, peserta mendapatkan pengetahuan praktis yang dapat mendukung kegiatan pertanian maupun pemeliharaan tanaman secara lebih ramah lingkungan. Dalam jangka panjang, kebiasaan ini dapat menjadi bagian dari upaya menjaga kebersihan dan keberlanjutan lingkungan desa.",
     coverImage: "/images/Proker/Mey/Cover.jpeg",
     documentationImages: [
-      "/images/Proker/Mey/1.jpeg",
-      "/images/Proker/Mey/2.jpeg",
-      "/images/Proker/Mey/3.jpeg",
-      "/images/Proker/Mey/4.jpeg",
+      {
+        src: "/images/Proker/Mey/1.jpeg",
+        alt: "Dokumentasi pengolahan pupuk kompos 1",
+      },
+      {
+        src: "/images/Proker/Mey/2.jpeg",
+        alt: "Dokumentasi pengolahan pupuk kompos 2",
+      },
+      {
+        src: "/images/Proker/Mey/3.jpeg",
+        alt: "Dokumentasi pengolahan pupuk kompos 3",
+      },
+      {
+        src: "/images/Proker/Mey/4.jpeg",
+        alt: "Dokumentasi pengolahan pupuk kompos 4",
+      },
     ],
   },
   {
@@ -271,6 +296,36 @@ const kknProgramBases: KknProgramBase[] = [
       "Pelaksanaan kegiatan dilakukan dengan mengambil dokumentasi foto pada rangkaian kegiatan yang berlangsung, terutama pada momen-momen yang merepresentasikan suasana dan nilai tradisi. Proses ini melibatkan pengamatan lapangan agar dokumentasi yang dihasilkan tidak hanya banyak, tetapi juga relevan secara naratif. Hasil dokumentasi kemudian disusun sebagai arsip visual yang lebih rapi untuk memudahkan pemanfaatannya di kemudian hari. Seluruh proses dilakukan dengan tetap menghormati jalannya kegiatan budaya di lapangan.",
     impact:
       "Dampak dari kegiatan ini adalah tersedianya dokumentasi visual yang lebih tertata mengenai tradisi Rasulan di lingkungan desa. Program ini membantu menjaga memori kolektif masyarakat melalui arsip yang dapat digunakan untuk berbagai kepentingan positif. Selain itu, dokumentasi yang baik membuka peluang promosi budaya yang lebih kuat dan lebih mudah dibagikan. Dalam jangka panjang, pengarsipan visual seperti ini mendukung pelestarian identitas budaya lokal secara berkelanjutan.",
+    coverImage: "/images/Proker/Rasulan/Cover.JPG",
+    coverImagePosition: "object-[center_38%]",
+    documentationImages: [
+      {
+        src: "/images/Proker/Rasulan/1.JPG",
+        alt: "Peserta arak-arakan Rasulan membawa lambang Sumberjo",
+        orientation: "portrait",
+        fit: "contain",
+      },
+      {
+        src: "/images/Proker/Rasulan/2.JPG",
+        alt: "Rombongan arak-arakan Rasulan di jalan desa",
+        orientation: "portrait",
+        fit: "contain",
+      },
+      {
+        src: "/images/Proker/Rasulan/3.JPG",
+        alt: "Potret peserta kegiatan Rasulan",
+        orientation: "landscape",
+        fit: "cover",
+        objectPosition: "object-center",
+      },
+      {
+        src: "/images/Proker/Rasulan/4.JPG",
+        alt: "Barisan musik dalam kegiatan Rasulan",
+        orientation: "landscape",
+        fit: "cover",
+        objectPosition: "object-center",
+      },
+    ],
   },
   {
     slug: "edukasi-pemanfaatan-ai-secara-bijak",
@@ -290,10 +345,22 @@ const kknProgramBases: KknProgramBase[] = [
       "Dampak kegiatan ini adalah meningkatnya pemahaman peserta mengenai teknologi AI dalam konteks yang lebih realistis dan bertanggung jawab. Program ini membantu membentuk sikap yang tidak hanya antusias terhadap teknologi, tetapi juga sadar akan batas dan risikonya. Peserta mendapatkan bekal awal untuk memanfaatkan AI sebagai alat bantu belajar atau eksplorasi secara lebih bijak. Dalam jangka panjang, edukasi seperti ini mendukung pembentukan literasi digital yang lebih matang sejak dini.",
     coverImage: "/images/Proker/Sinay/Cover.JPG",
     documentationImages: [
-      "/images/Proker/Sinay/1.JPG",
-      "/images/Proker/Sinay/2.JPG",
-      "/images/Proker/Sinay/3.JPG",
-      "/images/Proker/Sinay/4.JPG",
+      {
+        src: "/images/Proker/Sinay/1.JPG",
+        alt: "Dokumentasi edukasi pemanfaatan AI 1",
+      },
+      {
+        src: "/images/Proker/Sinay/2.JPG",
+        alt: "Dokumentasi edukasi pemanfaatan AI 2",
+      },
+      {
+        src: "/images/Proker/Sinay/3.JPG",
+        alt: "Dokumentasi edukasi pemanfaatan AI 3",
+      },
+      {
+        src: "/images/Proker/Sinay/4.JPG",
+        alt: "Dokumentasi edukasi pemanfaatan AI 4",
+      },
     ],
   },
   {
@@ -376,7 +443,9 @@ export const kknPrograms: KknProgram[] = kknProgramBases.map((program) => {
   );
   const generatedDocumentationImages = imageFileNames
     .filter((fileName) => !isCoverFileName(fileName))
-    .map((fileName) => getImagePublicPath(program.folder, fileName));
+    .map((fileName) => ({
+      src: getImagePublicPath(program.folder, fileName),
+    }));
   const documentationImages =
     program.documentationImages ?? generatedDocumentationImages;
   const coverImage =

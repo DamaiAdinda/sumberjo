@@ -5,6 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { imageSize } from "next/dist/compiled/image-size";
 import Footer from "@/components/Footer";
+import KegiatanGalleryImage from "@/components/KegiatanGalleryImage";
 import { getKknProgramBySlug, kknPrograms } from "@/data/kknPrograms";
 
 export const revalidate = 0;
@@ -45,10 +46,9 @@ export default async function KegiatanDetailPage(
   }
 
   const documentationGallery = program.documentationImages.map((image) => ({
-    image,
-    ...getImageMetadata(image),
+    ...image,
+    ...getImageMetadata(image.src),
   }));
-
   return (
     <main className="overflow-x-hidden">
       <section className="bg-[linear-gradient(135deg,#0b3a21,#0f4c2b_55%,#165b34)] pb-10 pt-6 text-white">
@@ -95,7 +95,9 @@ export default async function KegiatanDetailPage(
                   alt={program.title}
                   fill
                   priority
-                  className="object-cover object-[center_65%]"
+                  className={`object-cover ${
+                    program.coverImagePosition ?? "object-[center_65%]"
+                  }`}
                 />
               </div>
             </div>
@@ -134,43 +136,111 @@ export default async function KegiatanDetailPage(
         </div>
       </section>
 
-      <section className="pb-14">
-        <div className="container-shell max-w-6xl">
-          <div className="mb-8 flex items-center justify-between gap-4">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[color:var(--primary)]/65">
-                Dokumentasi
-              </p>
-              <h2 className="mt-2 text-3xl font-black tracking-[-0.03em] text-[color:var(--primary-strong)]">
-                Galeri Kegiatan
-              </h2>
+      <section className="pb-24">
+        <div className="container-shell">
+          <div className="mx-auto max-w-[720px] px-4">
+            <div className="mb-8 flex items-center justify-between gap-4">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[color:var(--primary)]/65">
+                  Dokumentasi
+                </p>
+                <h2 className="mt-2 text-3xl font-black tracking-[-0.03em] text-[color:var(--primary-strong)]">
+                  Galeri Kegiatan
+                </h2>
+              </div>
             </div>
-          </div>
 
-          {documentationGallery.length > 0 ? (
-            <div className="columns-1 gap-6 sm:columns-2 lg:columns-3">
-              {documentationGallery.map(({ image, width, height }, index) => (
-                <div
-                  key={image}
-                  className="mb-6 break-inside-avoid overflow-hidden rounded-3xl shadow-[0_16px_40px_rgba(20,60,40,0.10)]"
-                >
-                  <Image
-                    src={image}
-                    alt={`${program.title} - dokumentasi ${index + 1}`}
-                    width={width}
-                    height={height}
-                    className="h-auto w-full object-contain transition-transform duration-500 hover:scale-[1.02]"
-                  />
+            {documentationGallery.length > 0 ? (
+              <>
+                <div className="md:hidden">
+                  <div className="grid grid-cols-1 gap-5">
+                    {documentationGallery.map(({ src, alt, width, height }, index) => (
+                      <div
+                        key={src}
+                        className="overflow-hidden rounded-[20px] shadow-[0_10px_28px_rgba(20,60,40,0.08)]"
+                      >
+                        <KegiatanGalleryImage
+                          src={src}
+                          alt={alt ?? `${program.title} - dokumentasi ${index + 1}`}
+                          width={width}
+                          height={height}
+                          className="block h-auto w-full transition-transform duration-500 hover:scale-[1.015]"
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              ))}
-            </div>
-          ) : (
-            <div className="section-panel rounded-[1.5rem] p-8 text-center">
-              <p className="text-lg font-semibold text-[color:var(--primary-strong)]">
-                Dokumentasi kegiatan akan diperbarui setelah kegiatan berlangsung.
-              </p>
-            </div>
-          )}
+
+                <div className="mx-auto hidden max-w-[720px] gap-5 md:grid md:grid-cols-2 md:auto-rows-[220px]">
+                  {documentationGallery[0] ? (
+                    <div className="relative overflow-hidden rounded-[20px] shadow-[0_10px_28px_rgba(20,60,40,0.08)] md:row-span-2">
+                      <Image
+                        src={documentationGallery[0].src}
+                        alt={
+                          documentationGallery[0].alt ??
+                          `${program.title} - dokumentasi 1`
+                        }
+                        fill
+                        sizes="(max-width: 767px) 100vw, 350px"
+                        className="object-cover object-center transition-transform duration-500 hover:scale-[1.015]"
+                      />
+                    </div>
+                  ) : null}
+
+                  {documentationGallery[1] ? (
+                    <div className="relative overflow-hidden rounded-[20px] shadow-[0_10px_28px_rgba(20,60,40,0.08)]">
+                      <Image
+                        src={documentationGallery[1].src}
+                        alt={
+                          documentationGallery[1].alt ??
+                          `${program.title} - dokumentasi 2`
+                        }
+                        fill
+                        sizes="(max-width: 767px) 100vw, 350px"
+                        className="object-cover object-center transition-transform duration-500 hover:scale-[1.015]"
+                      />
+                    </div>
+                  ) : null}
+
+                  {documentationGallery[2] ? (
+                    <div className="relative overflow-hidden rounded-[20px] shadow-[0_10px_28px_rgba(20,60,40,0.08)]">
+                      <Image
+                        src={documentationGallery[2].src}
+                        alt={
+                          documentationGallery[2].alt ??
+                          `${program.title} - dokumentasi 3`
+                        }
+                        fill
+                        sizes="(max-width: 767px) 100vw, 350px"
+                        className="object-cover object-center transition-transform duration-500 hover:scale-[1.015]"
+                      />
+                    </div>
+                  ) : null}
+
+                  {documentationGallery[3] ? (
+                    <div className="relative overflow-hidden rounded-[20px] shadow-[0_10px_28px_rgba(20,60,40,0.08)] md:col-span-2 md:h-[240px]">
+                      <Image
+                        src={documentationGallery[3].src}
+                        alt={
+                          documentationGallery[3].alt ??
+                          `${program.title} - dokumentasi 4`
+                        }
+                        fill
+                        sizes="(max-width: 767px) 100vw, 720px"
+                        className="object-cover object-center transition-transform duration-500 hover:scale-[1.015]"
+                      />
+                    </div>
+                  ) : null}
+                </div>
+              </>
+            ) : (
+              <div className="section-panel rounded-[1.5rem] p-8 text-center">
+                <p className="text-lg font-semibold text-[color:var(--primary-strong)]">
+                  Dokumentasi kegiatan akan diperbarui setelah kegiatan berlangsung.
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       </section>
 

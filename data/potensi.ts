@@ -1,10 +1,17 @@
+export type PotensiGalleryImage = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+};
+
 export type PotensiDesaItem = {
   title: string;
   description: string;
   details: string;
   image: string;
   highlights: string[];
-  gallery: string[];
+  gallery: PotensiGalleryImage[];
   galleryNote?: string;
 };
 
@@ -22,8 +29,18 @@ export const potensiDesa: PotensiDesaItem[] = [
       "Mendukung ketahanan pangan dan aktivitas ekonomi desa.",
     ],
     gallery: [
-      "/images/bagian-pertanian.jpeg",
-      "/images/petani.jpeg",
+      {
+        src: "/images/bagian-pertanian.jpeg",
+        alt: "Lahan pertanian Desa Sumberjo",
+        width: 1280,
+        height: 960,
+      },
+      {
+        src: "/images/petani.jpeg",
+        alt: "Aktivitas petani di Desa Sumberjo",
+        width: 1280,
+        height: 960,
+      },
     ],
   },
   {
@@ -39,9 +56,24 @@ export const potensiDesa: PotensiDesaItem[] = [
       "Berpotensi dikembangkan sebagai usaha produktif berbasis rumah tangga.",
     ],
     gallery: [
-      "/images/kandang.jpeg",
-      "/images/kambing.jpeg",
-      "/images/sapi.jpeg",
+      {
+        src: "/images/kandang.jpeg",
+        alt: "Kandang ternak warga Desa Sumberjo",
+        width: 1280,
+        height: 960,
+      },
+      {
+        src: "/images/kambing.jpeg",
+        alt: "Peternakan kambing warga Desa Sumberjo",
+        width: 1280,
+        height: 960,
+      },
+      {
+        src: "/images/sapi.jpeg",
+        alt: "Peternakan sapi warga Desa Sumberjo",
+        width: 1280,
+        height: 960,
+      },
     ],
   },
   {
@@ -72,9 +104,18 @@ export const potensiDesa: PotensiDesaItem[] = [
       "Fasilitas umum membantu aktivitas harian berjalan lebih tertata.",
     ],
     gallery: [
-      "/images/lapangan.jpeg",
-      "/images/balai.jpeg",
-      "/images/maps-sumberjo.jpg",
+      {
+        src: "/images/lapangan.jpeg",
+        alt: "Fasilitas lapangan di Desa Sumberjo",
+        width: 700,
+        height: 1320,
+      },
+      {
+        src: "/images/balai.jpeg",
+        alt: "Balai desa sebagai fasilitas umum Desa Sumberjo",
+        width: 960,
+        height: 1280,
+      },
     ],
   },
 ];

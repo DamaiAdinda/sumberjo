@@ -82,7 +82,9 @@ export default function KknProgramsCarousel({
                     src={program.coverImage}
                     alt={program.title}
                     fill
-                    className="object-cover object-center"
+                    className={`object-cover ${
+                      program.coverImagePosition ?? "object-center"
+                    }`}
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(135deg,var(--primary),#1f6d3f)] px-6 text-center text-white">
