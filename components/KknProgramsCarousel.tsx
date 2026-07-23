@@ -68,24 +68,24 @@ export default function KknProgramsCarousel({
 
         <div
           ref={scrollRef}
-          className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-1 pb-4 sm:gap-6 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          className="flex items-stretch snap-x snap-mandatory gap-4 overflow-x-auto px-1 pb-4 sm:gap-6 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
           {programs.map((program) => (
             <article
               key={program.slug}
               data-card
-              className="section-panel flex h-[560px] w-[calc(100vw-2.75rem)] min-w-[280px] max-w-[320px] shrink-0 snap-start flex-col overflow-hidden rounded-[1.2rem] sm:h-[560px] sm:w-[320px] lg:h-[580px] lg:w-[360px] lg:max-w-[380px]"
+              className="section-panel flex h-[620px] w-[calc(100vw-2.75rem)] min-w-[280px] max-w-[320px] shrink-0 snap-start flex-col overflow-hidden rounded-3xl shadow-[0_18px_40px_rgba(15,76,43,0.12)] transition duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_28px_60px_rgba(15,76,43,0.18)] sm:h-[640px] sm:w-[320px] lg:h-[680px] lg:w-[360px] lg:max-w-[380px]"
             >
-              <div className="relative h-52 sm:h-56">
+              <div className="relative h-64 w-full overflow-hidden rounded-t-3xl sm:h-72 lg:h-84">
                 {program.coverImage ? (
                   <Image
                     src={program.coverImage}
                     alt={program.title}
                     fill
-                    className="object-cover"
+                    className="object-cover object-center"
                   />
                 ) : (
-                  <div className="flex h-full items-center justify-center bg-[linear-gradient(135deg,var(--primary),#1f6d3f)] px-6 text-center text-white">
+                  <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(135deg,var(--primary),#1f6d3f)] px-6 text-center text-white">
                     <div>
                       <p className="text-sm uppercase tracking-[0.24em] text-white/75">
                         Dokumentasi KKN
@@ -97,26 +97,28 @@ export default function KknProgramsCarousel({
                   </div>
                 )}
               </div>
-              <div className="flex flex-1 flex-col p-5 sm:p-6">
-                <span className="inline-flex w-fit rounded-md bg-[color:var(--primary)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-white">
-                  {program.category}
-                </span>
-                <h3 className="line-clamp-2 mt-4 text-[1.25rem] font-bold leading-tight tracking-tight text-[color:var(--primary-strong)] sm:text-[1.45rem]">
-                  {program.title}
-                </h3>
-                <p className="line-clamp-4 mt-3 text-sm leading-7 text-[color:var(--foreground)]/78 sm:text-base">
-                  {program.description}
-                </p>
-                <div className="mt-auto pt-5">
-                  <div className="flex flex-wrap gap-4 text-sm text-[color:var(--foreground)]/70">
-                  <span className="flex items-center gap-2">
-                    <FaUsers className="text-[color:var(--accent)]" />
-                    {program.personInCharge}
+              <div className="flex h-full flex-1 flex-col gap-4 p-6">
+                <div className="flex flex-col gap-4">
+                  <span className="inline-flex w-fit rounded-md bg-[color:var(--primary)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-white">
+                    {program.category}
                   </span>
+                  <h3 className="line-clamp-2 min-h-[3.5rem] text-[1.25rem] font-bold leading-tight tracking-tight text-[color:var(--primary-strong)] sm:text-[1.45rem]">
+                    {program.title}
+                  </h3>
+                  <p className="line-clamp-4 min-h-[7rem] text-sm leading-7 text-[color:var(--foreground)]/78 sm:text-base">
+                    {program.description}
+                  </p>
+                </div>
+                <div className="mt-auto flex flex-col gap-6 pt-2">
+                  <div className="flex flex-wrap gap-4 text-sm text-[color:var(--foreground)]/70">
+                    <span className="flex items-center gap-2">
+                      <FaUsers className="text-[color:var(--accent)]" />
+                      {program.personInCharge}
+                    </span>
                   </div>
                   <Link
                     href={`/kegiatan/${program.slug}`}
-                    className="mt-6 inline-flex w-fit items-center gap-2 rounded-lg border border-[color:var(--primary)] px-4 py-3 text-sm font-semibold text-[color:var(--primary)] hover:bg-[color:var(--primary)] hover:text-white"
+                    className="inline-flex w-fit items-center gap-2 rounded-xl border border-[color:var(--primary)] px-4 py-3 text-sm font-semibold text-[color:var(--primary)] hover:bg-[color:var(--primary)] hover:text-white"
                   >
                     Lihat Detail
                     <FaArrowRight className="text-xs" />
